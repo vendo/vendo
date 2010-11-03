@@ -1,0 +1,33 @@
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "modules/auth"]
+	path = modules/auth
+	url = git://github.com/kohana/auth.git
+[submodule "modules/auto-modeler"]
+	path = modules/auto-modeler
+	url = git://github.com/zombor/Auto-Modeler.git
+[submodule "modules/database"]
+	path = modules/database
+	url = git://github.com/kohana/database.git
+[submodule "modules/image"]
+	path = modules/image
+	url = git://github.com/kohana/image.git
+[submodule "modules/kostache"]
+	path = modules/kostache
+	url = git://github.com/zombor/KOstache.git
+[submodule "modules/vendo-core"]
+	path = modules/vendo-core
+	url = git://github.com/vendo/core.git
+[submodule "modules/vendo-billing"]
+	path = modules/vendo-billing
+	url = git://github.com/vendo/billing.git
+[submodule "modules/vendo-application"]
+	path = modules/vendo-application
+	url = git://github.com/vendo/application.git
+[submodule "modules/vendo-admin"]
+	path = modules/vendo-admin
+	url = git@github.com:vendo/admin.git
+[submodule "modules/vendo-acl"]
+	path = modules/vendo-acl
+	url = git://github.com/vendo/acl.git
