@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="modules/unittest/bootstrap.php">
+	<groups>
+		<exclude>
+			<group>kohana</group>
+		</exclude>
+	</groups>
+	<testsuites>
+		<testsuite name="Billing">
+			<directory suffix=".php">modules/vendo-billing/tests</directory>
+		</testsuite>
+		<testsuite name="Core">
+			<directory suffix=".php">modules/vendo-core/tests</directory>
+		</testsuite>
+		<testsuite name="ACL">
+			<directory suffix=".php">modules/vendo-acl/tests</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>
