@@ -28,3 +28,6 @@
 [submodule "modules/vendo-acl"]
 	path = modules/vendo-acl
 	url = git://github.com/vendo/acl.git
+[submodule "modules/vendo-admin"]
+	path = modules/vendo-admin
+	url = git://github.com/vendo/admin.git
