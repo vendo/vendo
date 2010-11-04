@@ -25,9 +25,6 @@
 [submodule "modules/vendo-application"]
 	path = modules/vendo-application
 	url = git://github.com/vendo/application.git
-[submodule "modules/vendo-admin"]
-	path = modules/vendo-admin
-	url = git@github.com:vendo/admin.git
 [submodule "modules/vendo-acl"]
 	path = modules/vendo-acl
 	url = git://github.com/vendo/acl.git
