@@ -47,7 +47,7 @@ CREATE TABLE `contacts` (
   `email` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `address_id` bigint(20) unsigned NOT NULL
+  `address_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_contacts_address_id` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
