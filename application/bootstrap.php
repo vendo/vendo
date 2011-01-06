@@ -100,7 +100,6 @@ Kohana::modules(
 	)
 );
 
-Session::$default = 'cookie';
 Session::instance();
 
 /**
