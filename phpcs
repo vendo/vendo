@@ -1,0 +1,1 @@
+phpcs --standard=Vendo --ignore=system/*,application/*,modules/auth/*,modules/auto-modeler/*,modules/database/*,modules/image/*,modules/kostache/*,modules/unittest/*,index.php -s  --tab-width=4 .
