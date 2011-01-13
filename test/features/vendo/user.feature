@@ -9,17 +9,14 @@ Feature: User management
 		Then I should be logged in
 
 	Scenario: login
-		Given I am logged out
-		When I click the "Login" link
-		And I fill in "email" with "foo@bar.com"
-		And I fill in "password" with "test"
+		Given I log in
 		Then I should be logged in
 
 	Scenario: logout
-		Given I am logged out
-		When I click the "Login" link
-		And I fill in "email" with "foo@bar.com"
-		And I fill in "password" with "test"
+		Given I log in
 		Then I should be logged in
 		When I click the "Logout" link
 		Then I should be logged out
+
+	Scenario: delete registered user
+		Given I delete the test user

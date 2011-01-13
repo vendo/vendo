@@ -5,6 +5,6 @@ Feature: Shopping cart checkout
 		Given there are items in my cart
 		When I go to /cart/index
 		And I click the "Checkout" link
-		Then I should see the "Checkout goes here" page
-		When I submit the form
-		Then I should see the "Checkout goes here" page
+		Then I should see "Checkout goes here"
+		When I press "Submit Order"
+		Then I should see "Checkout goes here"
