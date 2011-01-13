@@ -1,0 +1,6 @@
+parameters:
+  behat.features.path:      test/features/vendo
+
+  behat.steps.path:
+    - %behat.configuration.path%/features/vendo/steps
+    - %behat.configuration.path%/features/default/steps
