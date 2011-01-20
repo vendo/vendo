@@ -1,28 +1,19 @@
-# Sequel Pro dump
-# Version 2492
-# http://code.google.com/p/sequel-pro
-#
-# Host: localhost (MySQL 5.1.41)
-# Database: vendo
-# Generation Time: 2010-09-30 21:34:08 -0400
-# ************************************************************
+-- phpMyAdmin SQL Dump
+-- version 3.3.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 20, 2011 at 04:59 PM
+-- Server version: 5.1.49
+-- PHP Version: 5.3.5
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `addresses`
+--
 
-# Dump of table addresses
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `addresses`;
-
-CREATE TABLE `addresses` (
+CREATE TABLE IF NOT EXISTS `addresses` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `billing_address` varchar(100) NOT NULL,
   `billing_city` varchar(50) NOT NULL,
@@ -33,179 +24,224 @@ CREATE TABLE `addresses` (
   `shipping_state` varchar(50) DEFAULT NULL,
   `shipping_postal_code` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `contacts`
+--
 
-# Dump of table contacts
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `contacts`;
-
-CREATE TABLE `contacts` (
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `address_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_contacts_address_id` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `address_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Table structure for table `orders`
+--
 
-
-# Dump of table order_products
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `order_products`;
-
-CREATE TABLE `order_products` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` bigint(20) unsigned NOT NULL,
-  `product_id` bigint(20) unsigned NOT NULL,
-  `quantity` mediumint(9) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_order_products_product` (`product_id`),
-  KEY `fk_order_products_order` (`order_id`),
-  CONSTRAINT `fk_order_products_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_order_products_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table orders
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `orders`;
-
-CREATE TABLE `orders` (
+CREATE TABLE IF NOT EXISTS `orders` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
   `date_created` bigint(20) unsigned NOT NULL,
   `address_id` bigint(20) unsigned DEFAULT NULL,
   `contact_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_order_user` (`user_id`),
-  CONSTRAINT `fk_order_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_order_user` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Table structure for table `order_products`
+--
 
-
-# Dump of table product_categories
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `product_categories`;
-
-CREATE TABLE `product_categories` (
+CREATE TABLE IF NOT EXISTS `order_products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `order` int(10) unsigned NOT NULL,
-  `parent_id` bigint(20) unsigned DEFAULT NULL,
+  `order_id` bigint(20) unsigned NOT NULL,
+  `product_id` bigint(20) unsigned NOT NULL,
+  `quantity` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_order_products_order` (`order_id`),
+  KEY `fk_order_products_product` (`product_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `photos`
+--
+
+CREATE TABLE IF NOT EXISTS `photos` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `filename` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `products`
+--
 
-# Dump of table products
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `products`;
-
-CREATE TABLE `products` (
+CREATE TABLE IF NOT EXISTS `products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `description` text NOT NULL,
   `order` int(10) unsigned NOT NULL,
-  `primary_photo_id` int(10) unsigned NOT NULL,
+  `primary_photo_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Table structure for table `products_photos`
+--
 
+CREATE TABLE IF NOT EXISTS `products_photos` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) unsigned NOT NULL,
+  `photo_id` bigint(20) unsigned NOT NULL,
+  `order` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_products_photos_product_id` (`product_id`),
+  KEY `fk_products_photos_photo_id` (`photo_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-# Dump of table product_categories_products
-# ------------------------------------------------------------
+--
+-- Table structure for table `product_categories`
+--
 
-DROP TABLE IF EXISTS `product_categories_products`;
+CREATE TABLE IF NOT EXISTS `product_categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `order` int(10) unsigned NOT NULL,
+  `parent_id` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`parent_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE `product_categories_products` (
+--
+-- Table structure for table `product_categories_products`
+--
+
+CREATE TABLE IF NOT EXISTS `product_categories_products` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) unsigned NOT NULL,
   `product_category_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_product_category` (`product_category_id`),
   KEY `fk_product` (`product_id`),
-  CONSTRAINT `fk_product_category` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_product_category` (`product_category_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Table structure for table `roles`
+--
 
-
-# Dump of table roles
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `roles`;
-
-CREATE TABLE `roles` (
+CREATE TABLE IF NOT EXISTS `roles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`,`name`)
-VALUES
-	(1,'login'),
-	(2,'admin');
+--
+-- Dumping data for table `roles`
+--
 
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'login'),
+(2, 'admin');
 
+-- --------------------------------------------------------
 
-# Dump of table users
-# ------------------------------------------------------------
+--
+-- Table structure for table `users`
+--
 
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` blob NOT NULL,
   `address_id` bigint(20) unsigned DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `users` default password is "test"
+--
 
+INSERT INTO `users` (`id`, `email`, `password`, `address_id`, `first_name`, `last_name`) VALUES
+(1, 'admin@example.com', 0xe153b3307b87f258d2b535f91d3966298219083009c039f4e1a4057d9a50d56c67c959f9dd6ec57103d7993d28347b299c932a6f10a77b9bae0bab3c813eeda213c6496eaa3c069b21d8c06d191868dcff563d1b66615a37d784d22c64ed89bb, NULL, 'Foo', 'Bar');
 
-# Dump of table users_roles
-# ------------------------------------------------------------
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `users_roles`;
+--
+-- Table structure for table `users_roles`
+--
 
-CREATE TABLE `users_roles` (
+CREATE TABLE IF NOT EXISTS `users_roles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
   `role_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_user` (`user_id`),
-  KEY `fk_role` (`role_id`),
-  CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_role` (`role_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- Dumping data for table `users_roles`
+--
 
+INSERT INTO `users_roles` (`id`, `user_id`, `role_id`) VALUES
+(1, 1, 1),
+(2, 1, 2);
 
+--
+-- Constraints for dumped tables
+--
 
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_order_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+--
+-- Constraints for table `order_products`
+--
+ALTER TABLE `order_products`
+  ADD CONSTRAINT `fk_order_products_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_order_products_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Constraints for table `products_photos`
+--
+ALTER TABLE `products_photos`
+  ADD CONSTRAINT `fk_products_photos_photo_id` FOREIGN KEY (`photo_id`) REFERENCES `photos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_products_photos_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD CONSTRAINT `product_categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `product_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_categories_products`
+--
+ALTER TABLE `product_categories_products`
+  ADD CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_product_category` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `users_roles`
+--
+ALTER TABLE `users_roles`
+  ADD CONSTRAINT `fk_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
