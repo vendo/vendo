@@ -97,10 +97,13 @@ Kohana::modules(
 		'kostache'          => MODPATH.'kostache',
 
 		'unittest'          => MODPATH.'unittest',
+		'query-path'        => MODPATH.'query-path',
 	)
 );
 
 Session::instance();
+
+Auth::$salt = NULL;
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
