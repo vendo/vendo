@@ -45,29 +45,17 @@ You can use the vendo-application as a starting point, or for inspiration on how
 
 You can use the vendo-application module as a base for your e-commerce application. If you are happy with the functionality of the stock controllers but not the views (you should probably never use them as-is), you can replace the view class and templates in your application to get a customized skin on top of it.
 
-### Integrating the vendo user system with your user system
-
-You need to do a bit of work to integrate the user system of vendo into your application. Vendo comes with two "drivers" for this at the moment: ORM and AutoModeler. To use either one, you'll need to put this into your application directory:
-
-	classes/model/vendo/user.php
-
-which contains:
-
-	<?php
-	class Model_Vendo_User extends Model_Vendo_Core_User_ORM
-
-or:
-
-	<?php
-	class Model_Vendo_User extends Model_Vendo_Core_User_AutoModeler
-
 ## Testing
 
-One goal of Vendo is to be completely tested. This helps prevent bugs and defines a stable API. We use phpunit for unit tests, and plan on using cucumber for behavior tests once the application ui is stable.
+One goal of Vendo is to be completely tested. This helps prevent bugs and defines a stable API. We use phpunit for unit tests, and [Behat](http://everzet.com/Behat/) for behavior/UI tests.
+
+Test coverage is currently sparse in both areas.
 
 If you contribute code, please make sure that you use TDD or BDD, depending on your contribution.
 
-To run the phpunit tests, simple run `phpunit` from the root of the repository. All tests should pass. Please file an issue if they do not pass on your system.
+To run the phpunit tests, simply run `phpunit` from the root of this repository. All tests should pass. Please file an issue if they do not pass on your system.
+
+To run the Behat tests, run `behat -c test/behat.yml` in the root of this repository.
 
 ## Integration
 
@@ -80,7 +68,7 @@ If you are using the Kohana Template Controller, put this in an extended templat
 		return parent::after();
 	}
 
-Then make a templates/layout.mustache file in your application directory with this in it:
+Then make a templates/layout.mustache file in your application directory with only this in it:
 
 	{{>body}}
 
