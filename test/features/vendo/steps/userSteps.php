@@ -6,7 +6,6 @@ $steps->And('/^I fill out the registration form$/', function($world) use($steps)
 	$steps->And('I fill in "user[last_name]" with "bar"', $world);
 	$steps->And('I fill in "user[password]" with "test"', $world);
 	$steps->And('I fill in "user[repeat_password]" with "test"', $world);
-	$steps->And('I check "user[role_id][]"', $world);
 });
 
 $steps->Given('/^I log in$/', function($world) use($steps) {
