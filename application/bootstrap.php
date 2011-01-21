@@ -2,9 +2,6 @@
 
 //-- Environment setup --------------------------------------------------------
 
-// Load the base, low-level functions
-require SYSPATH.'base'.EXT;
-
 // Load the core Kohana class
 require SYSPATH.'classes/kohana/core'.EXT;
 
@@ -54,6 +51,11 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 //-- Configuration and initialization -----------------------------------------
 
 /**
+ * Set the default language
+ */
+I18n::lang('en-us');
+
+/**
  * Initialize Kohana, setting the default options.
  *
  * The following options are available:
@@ -68,6 +70,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  */
 Kohana::init(array(
 	'base_url'   => '/',
+	'index_file' => '',
 ));
 
 /**

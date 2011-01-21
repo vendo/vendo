@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `address_id`, `first_name`, `last_name`) VALUES
-(1, 'admin@example.com', 0xe153b3307b87f258d2b535f91d3966298219083009c039f4e1a4057d9a50d56c67c959f9dd6ec57103d7993d28347b299c932a6f10a77b9bae0bab3c813eeda213c6496eaa3c069b21d8c06d191868dcff563d1b66615a37d784d22c64ed89bb, NULL, 'Foo', 'Bar');
+(1, 'admin@example.com', 0xf5251c27aac43208936f638a47ce0722e3dbd8463bf1b0241e0f71368015880ff263ae31b88c77ada40761535d5716fbe9f02e3d20368d49a3747dfb237d591dfd3a358c275f6bb44885f6060930b022c4751c00eb4dde268042801d0b26b172, NULL, 'Foo', 'Bar');
 
 -- --------------------------------------------------------
 
