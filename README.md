@@ -6,6 +6,8 @@ A lightweight e-commerce framework developed with the Kohana3 php framework.
 
 It's main goal is to provide an excellent starting base for you to develop e-commerce applications with. It's not designed to be a drop-in e-commerce application, like Magento or OpenCart.
 
+Vendo will give you a very good starting base for your e-commerce application, with sane schema, a sane data model, and easy to integrate payment classes.
+
 ## What is special about Vendo?
 
  1. It will be easy to build applications with
@@ -37,13 +39,15 @@ If you just want to demo the whole vendo-application, do:
     * The schema file contains table creation for users and roles. If you don't need this (if you are bolting this onto an existing application), simply omit it.
  3. Make sure the application/photos/ directory is writable by the webserver
 
-If you'd like to use Vendo to develop your e-commerce application, you can omit the vendo-application module, and use the other four (you still need the database). Sometime in the near future, the modules will be broken into their own repositories.
+If you'd like to use Vendo to develop your e-commerce application, you can omit the vendo-application module, and use the other four (you still need the database).
 
 You can use the vendo-application as a starting point, or for inspiration on how to build an application with Vendo.
 
 ### Using vendo-application as a base
 
-You can use the vendo-application module as a base for your e-commerce application. If you are happy with the functionality of the stock controllers but not the views (you should probably never use them as-is), you can replace the view class and templates in your application to get a customized skin on top of it.
+There is a *demo*,  `vendo-application` module, which can base for your e-commerce application. If you are happy with the functionality of the stock controllers but not the views (you should probably never use them as-is), you can replace the view class and templates in your application to get a customized skin on top of it.
+
+It is a *demo* application. This is meant to be a guide for you to let you see what Vendo can do. You are not required, and are not encouraged to use it.
 
 ## Testing
 
