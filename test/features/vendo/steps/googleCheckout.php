@@ -34,3 +34,19 @@ $steps->And('/^the order should be assigned the google_order_id value from the n
 	$order = new Model_Order_Google($world->models['order']->id);
 	assertEquals('1234567', $order->google_order_id);
 });
+
+$steps->When('/^I submit the order$/', function($world) {
+	try
+	{
+		$world->response = Payment_Offsite::process($world->models['order'], TRUE);
+	}
+	catch (Payment_Exception $e)
+	{
+		throw new \Everzet\Behat\Exception\Pending('No Internet Connection!');
+	}
+});
+
+$steps->Then('/^it should return a redirection URL$/', function($world) {
+	$url = parse_url($world->response);
+	assertInternalType('array', $url);
+});

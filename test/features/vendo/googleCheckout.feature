@@ -6,3 +6,8 @@ Feature: Google checkout processing
 		When a user submits a google checkout order
 		Then I should receive an order notification
 		And the order should be assigned the google_order_id value from the notification
+
+	Scenario: Google checkout returns a redirect URL when an order is submitted
+		Given I have an existing order
+		When I submit the order
+		Then it should return a redirection URL
