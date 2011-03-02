@@ -15,6 +15,7 @@ $steps->Given('/^I create a test product$/', function($world) {
 		)
 	);
 	$product->save();
+	$world->models['product'] = $product;
 });
 
 $steps->Given('/^I delete the test product$/', function($world) {

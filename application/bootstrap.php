@@ -93,9 +93,9 @@ Kohana::modules(
 		'vendo-core'        => MODPATH.'vendo-core',
 		'vendo-billing'     => MODPATH.'vendo-billing',
 		'vendo-acl'         => MODPATH.'vendo-acl',
+		'auto-modeler'      => MODPATH.'auto-modeler',
 		'auth'              => MODPATH.'auth',
 		'database'          => MODPATH.'database',
-		'auto-modeler'      => MODPATH.'auto-modeler',
 		'image'             => MODPATH.'image',
 		'kostache'          => MODPATH.'kostache',
 
