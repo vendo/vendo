@@ -3,9 +3,15 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2011 at 04:59 PM
+-- Generation Time: Mar 03, 2011 at 07:05 AM
 -- Server version: 5.1.49
 -- PHP Version: 5.3.5
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `vendo`
+--
 
 -- --------------------------------------------------------
 
@@ -24,7 +30,8 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   `shipping_state` varchar(50) DEFAULT NULL,
   `shipping_postal_code` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
+
 
 -- --------------------------------------------------------
 
@@ -39,7 +46,10 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `last_name` varchar(50) NOT NULL,
   `address_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=106 ;
+
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `orders`
@@ -51,9 +61,56 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `date_created` bigint(20) unsigned NOT NULL,
   `address_id` bigint(20) unsigned DEFAULT NULL,
   `contact_id` bigint(20) unsigned DEFAULT NULL,
+  `paid` tinyint(3) unsigned NOT NULL,
+  `order_type_id` smallint(5) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_order_user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `orders`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_credit_cards`
+--
+
+CREATE TABLE IF NOT EXISTS `order_credit_cards` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `order_credit_cards`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_googles`
+--
+
+CREATE TABLE IF NOT EXISTS `order_googles` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) unsigned NOT NULL,
+  `google_order_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`),
+  KEY `google_order_id` (`google_order_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `order_googles`
+--
+
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `order_products`
@@ -67,7 +124,12 @@ CREATE TABLE IF NOT EXISTS `order_products` (
   PRIMARY KEY (`id`),
   KEY `fk_order_products_order` (`order_id`),
   KEY `fk_order_products_product` (`product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=131 ;
+
+--
+-- Dumping data for table `order_products`
+--
+
 
 -- --------------------------------------------------------
 
@@ -79,7 +141,12 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `filename` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `photos`
+--
+
 
 -- --------------------------------------------------------
 
@@ -95,7 +162,10 @@ CREATE TABLE IF NOT EXISTS `products` (
   `order` int(10) unsigned NOT NULL,
   `primary_photo_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=172 ;
+
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `products_photos`
@@ -109,7 +179,14 @@ CREATE TABLE IF NOT EXISTS `products_photos` (
   PRIMARY KEY (`id`),
   KEY `fk_products_photos_product_id` (`product_id`),
   KEY `fk_products_photos_photo_id` (`photo_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `products_photos`
+--
+
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `product_categories`
@@ -122,7 +199,16 @@ CREATE TABLE IF NOT EXISTS `product_categories` (
   `parent_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `name`, `order`, `parent_id`) VALUES
+(1, 'Foo', 1, NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `product_categories_products`
@@ -135,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `product_categories_products` (
   PRIMARY KEY (`id`),
   KEY `fk_product` (`product_id`),
   KEY `fk_product_category` (`product_category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Table structure for table `roles`
@@ -170,15 +256,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
--- Dumping data for table `users` default password is "test"
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `address_id`, `first_name`, `last_name`) VALUES
 (1, 'admin@example.com', 0xf5251c27aac43208936f638a47ce0722e3dbd8463bf1b0241e0f71368015880ff263ae31b88c77ada40761535d5716fbe9f02e3d20368d49a3747dfb237d591dfd3a358c275f6bb44885f6060930b022c4751c00eb4dde268042801d0b26b172, NULL, 'Foo', 'Bar');
-
 -- --------------------------------------------------------
 
 --
@@ -192,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
   PRIMARY KEY (`id`),
   KEY `fk_user` (`user_id`),
   KEY `fk_role` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `users_roles`
@@ -200,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
 
 INSERT INTO `users_roles` (`id`, `user_id`, `role_id`) VALUES
 (1, 1, 1),
-(2, 1, 2);
+(2, 1, 2),;
 
 --
 -- Constraints for dumped tables
@@ -211,6 +296,18 @@ INSERT INTO `users_roles` (`id`, `user_id`, `role_id`) VALUES
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_order_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_credit_cards`
+--
+ALTER TABLE `order_credit_cards`
+  ADD CONSTRAINT `order_credit_cards_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_googles`
+--
+ALTER TABLE `order_googles`
+  ADD CONSTRAINT `order_googles_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `order_products`

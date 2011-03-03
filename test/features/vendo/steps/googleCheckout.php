@@ -1,6 +1,6 @@
 <?php
 
-$steps->Given('/^I have an existing order$/', function($world) use($steps) {
+$steps->Given('/^I have an existing google checkout order$/', function($world) use($steps) {
 	$steps->Given('I create a test product', $world);
 	$product = Model::factory('vendo_product')->load(
 		db::select()->where('name', '=', 'Test Product')
@@ -14,8 +14,13 @@ $steps->Given('/^I have an existing order$/', function($world) use($steps) {
 	$order->add_product($product);
 	$order->contact_id = $contact->id;
 	$order->address_id = $address->id;
+	$order->order_type_id = Model_Order::TYPE_GOOGLE_CHECKOUT;
 	$order->save();
 	$world->models['order'] = $order;
+
+	$order_data = new Model_Order_Google;
+	$order_data->order_id = $order->id;
+	$order_data->save();
 });
 
 $steps->When('/^a user submits a google checkout order$/', function($world) {
@@ -31,8 +36,9 @@ $steps->Then('/^I should receive an order notification$/', function($world) {
 });
 
 $steps->And('/^the order should be assigned the google_order_id value from the notification$/', function($world) use($steps) {
-	$order = new Model_Order_Google($world->models['order']->id);
-	assertEquals('1234567', $order->google_order_id);
+	$order = new Model_Order($world->models['order']->id);
+	$order_data = $order->get_ancilary_model();
+	assertEquals('1234567', $order_data->google_order_id);
 });
 
 $steps->When('/^I submit the order$/', function($world) {
