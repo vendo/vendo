@@ -1,3 +1,4 @@
+@billing @code
 Feature: Google checkout processing
 	Google checkout works
 

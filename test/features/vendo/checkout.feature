@@ -1,3 +1,4 @@
+@billing @website
 Feature: Shopping cart checkout
 	In order for users to get stuff, they have to pay for it
 

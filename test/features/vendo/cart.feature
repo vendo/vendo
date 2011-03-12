@@ -1,3 +1,4 @@
+@cart @website
 Feature: Shopping cart management
 	Users can add, modify and delete things in their shopping cart
 

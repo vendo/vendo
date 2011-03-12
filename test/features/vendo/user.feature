@@ -1,3 +1,4 @@
+@users @website
 Feature: User management
 	Users can register, login, logout
 

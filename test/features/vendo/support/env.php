@@ -1,9 +1,9 @@
 <?php 
 
 // Init kohana
-defined('APPPATH') ?: define('APPPATH', 'application/');
-defined('MODPATH') ?: define('MODPATH', 'modules/');
-defined('SYSPATH') ?: define('SYSPATH', 'system/');
+defined('APPPATH') ?: define('APPPATH', '../application/');
+defined('MODPATH') ?: define('MODPATH', '../modules/');
+defined('SYSPATH') ?: define('SYSPATH', '../system/');
 defined('EXT')     ?: define('EXT', '.php');
 
 require_once APPPATH.'bootstrap.php';
@@ -11,7 +11,7 @@ require_once APPPATH.'bootstrap.php';
 require_once 'Zend/Registry.php';
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
-require_once 'test/features/goutte.phar';
+require_once 'features/goutte.phar';
 
 // Create WebClient behavior
 $world->client = new \Goutte\Client;
