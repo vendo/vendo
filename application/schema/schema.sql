@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
 
 INSERT INTO `users_roles` (`id`, `user_id`, `role_id`) VALUES
 (1, 1, 1),
-(2, 1, 2),;
+(2, 1, 2);
 
 --
 -- Constraints for dumped tables
