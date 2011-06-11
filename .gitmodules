@@ -34,3 +34,9 @@
 [submodule "test/features/default"]
 	path = test/features/default
 	url = git://github.com/zombor/Goutte-for-Behat.git
+[submodule "modules/minion-core"]
+	path = modules/minion-core
+	url = https://github.com/kohana-minion/core.git
+[submodule "modules/minion-migrations"]
+	path = modules/minion-migrations
+	url = https://github.com/kohana-minion/tasks-migrations.git

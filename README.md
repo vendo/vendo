@@ -35,9 +35,10 @@ Vendo has many parts:
 If you just want to demo the whole vendo-application, do:
 
  1. Check out this repository with the --recursive flag to catch all the submodules (there are a few of them)
- 2. Install the database: Run the schema.sql file located in application/schema/
-    * The schema file contains table creation for users and roles. If you don't need this (if you are bolting this onto an existing application), simply omit it.
- 3. Make sure the application/photos/ directory is writable by the webserver
+ 2. Create a database, and run this SQL: `https://raw.github.com/kohana-minion/tasks-migrations/develop/minion_schema.sql`
+ 3. Install the schema: Run `./minion db:migrate` from the root of the repository.
+    * The schema files contains table creation for users and roles. If you don't need this (if you are bolting this onto an existing application), simply omit it.
+ 4. Make sure the application/photos/ directory is writable by the webserver
 
 If you'd like to use Vendo to develop your e-commerce application, you can omit the vendo-application module, and use the other four (you still need the database).
 
