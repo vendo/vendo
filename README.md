@@ -35,8 +35,7 @@ Vendo has many parts:
 If you just want to demo the whole vendo-application, do:
 
  1. Check out this repository with the --recursive flag to catch all the submodules (there are a few of them)
- 2. Create a database, and run this SQL: `https://raw.github.com/kohana-minion/tasks-migrations/develop/minion_schema.sql`
- 3. Install the schema: Run `./minion db:migrate` from the root of the repository.
+ 2. Install the schema: Run `./minion db:migrate` from the root of the repository.
     * The schema files contains table creation for users and roles. If you don't need this (if you are bolting this onto an existing application), simply omit it.
     * The default admin user's login credentials are:
       * Email: admin@example.com
