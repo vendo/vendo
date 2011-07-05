@@ -100,7 +100,8 @@ Kohana::modules(
 		'kostache'          => MODPATH.'kostache',
 
 		'unittest'          => MODPATH.'unittest',
-		'query-path'        => MODPATH.'query-path',
+		'minion-core'       => MODPATH.'minion-core',
+		'minion-migrations' => MODPATH.'minion-migrations',
 	)
 );
 

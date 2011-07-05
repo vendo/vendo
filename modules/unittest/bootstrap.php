@@ -1,8 +1,8 @@
 <?php
 
-$application = '../../application';
-$modules = '../../modules';
-$system = '../../system';
+$application = '../application';
+$modules = '../modules';
+$system = '../system';
 define('EXT', '.php');
 error_reporting(E_ALL | E_STRICT);
 
