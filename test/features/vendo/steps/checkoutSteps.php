@@ -1,11 +1,16 @@
 <?php
 
 $steps->Given('/^there are items in my cart$/', function($world) {
-	$world->visit('cart/add?id=105');
-	assertTrue($world->response->filter('.total_items')->extract(array('_text')) > 0);
+	$product = Model::factory('vendo_product')->load(
+		db::select()->where('name', '=', 'Foobar')
+	);
+	$world->getSession()->visit('/cart/add?id='.$product->id);
+	$node = $world->getSession()->getPage()->find('xpath', '//td[@id="total_items"]');
+
+	assertTrue($node->getText() > 0);
 });
 
 $steps->Then('/^I should see the "(.+)" page$/', function($world, $title) {
-	$text = $world->response->filter('div#content > h2')->extract(array('_text'));
-	assertSame(current($text), $title);
+	$node = $world->getSession()->getPage()->find('xpath', '//div[@id="content"]/h2');
+	assertSame($title, $node->getText());
 });

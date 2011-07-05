@@ -4,7 +4,7 @@ Feature: User management
 
 	Scenario: register
 		Given I am logged out
-		When I click the "Register" link
+		When I follow "Register"
 		And I fill out the registration form
 		And I press "Submit"
 		Then I should be logged in
@@ -16,7 +16,7 @@ Feature: User management
 	Scenario: logout
 		Given I log in
 		Then I should be logged in
-		When I click the "Logout" link
+		When I follow "Logout"
 		Then I should be logged out
 
 	Scenario: delete registered user

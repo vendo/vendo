@@ -10,7 +10,7 @@ $steps->And('/^I fill out the registration form$/', function($world) use($steps)
 
 $steps->Given('/^I log in$/', function($world) use($steps) {
 	$steps->Given('I am logged out', $world);
-	$steps->When('I click the "Login" link', $world);
+	$steps->When('I follow "Login"', $world);
 	$steps->And('I fill in "email" with "test@example.com"', $world);
 	$steps->And('I fill in "password" with "test"', $world);
 	$steps->And('I press "Login"', $world);

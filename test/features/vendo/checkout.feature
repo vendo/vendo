@@ -5,7 +5,7 @@ Feature: Shopping cart checkout
 	Scenario: Checkout fails with no data
 		Given there are items in my cart
 		When I go to /cart/index
-		And I click the "Checkout" link
+		And I follow "Checkout"
 		Then I should see "Checkout goes here"
 		When I press "Submit Order"
 		Then I should see "Checkout goes here"

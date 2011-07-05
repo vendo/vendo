@@ -1,17 +1,4 @@
-<?php 
-
-// Init kohana
-defined('APPPATH') ?: define('APPPATH', '../application/');
-defined('MODPATH') ?: define('MODPATH', '../modules/');
-defined('SYSPATH') ?: define('SYSPATH', '../system/');
-defined('EXT')     ?: define('EXT', '.php');
-
-require_once APPPATH.'bootstrap.php';
-
-require_once 'Zend/Registry.php';
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
-require_once 'features/goutte.phar';
+<?php
 
 // Create WebClient behavior
 $world->client = new \Goutte\Client;
@@ -37,7 +24,7 @@ register_shutdown_function(function($world)
 	}
 	catch (Exception $e)
 	{
-		var_dump('Couldn\'t delete a model: '.$e->getMessage());
+		//var_dump('Couldn\'t delete a model: '.$e->getMessage());
 	}
 },
 $world);

@@ -1,6 +1,22 @@
-paths:
-  features: %behat.paths.base%/vendo
-  support: %behat.paths.base%/vendo/support
-  steps:
-    - %behat.paths.base%/vendo/steps
-    - %behat.paths.base%/default/steps
+#paths:
+#  features: %behat.paths.base%/vendo
+#  support: %behat.paths.base%/vendo/support
+#  steps:
+#    - %behat.paths.base%/vendo/steps
+#    - %behat.paths.base%/default/steps
+
+default:
+#  formatter:
+#    name:   progress
+  environment:
+      parameters:
+        start_url: http://vendo/
+
+  paths:
+    features: '%%BEHAT_BASE_PATH%%/vendo'
+    support: '%%BEHAT_BASE_PATH%%/vendo/support'
+    steps:
+      - '%%BEHAT_BASE_PATH%%/vendo/steps'
+
+imports:
+  - mink/behat.yml

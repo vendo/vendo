@@ -1,7 +1,9 @@
 <?php
 
 $steps->And('/^there should be (\d+) item|items in my shopping cart$/', function($world, $num) {
-    assertTrue(current($world->response->filter('.total_items')->extract(array('_text'))) == $num);
+	$node = $world->getSession()->getPage()->find('xpath', '//td[@id="total_items"]');
+
+	assertTrue($node->getText() == $num);
 });
 
 $steps->Given('/^I create a test product$/', function($world) {
@@ -24,23 +26,23 @@ $steps->Given('/^I delete the test product$/', function($world) {
 	)->delete();
 });
 
-$steps->Given('/^I am on the test product page$/', function($world) {
+$steps->Given('/^I visit the test product page$/', function($world) {
 	$product = Model::factory('vendo_product')->load(
 		db::select()->where('name', '=', 'Test Product')
 	);
-	$world->visit('/product/view/'.$product->id);
+	$world->getSession()->visit($world->getPathTo('/product/view/'.$product->id));
 });
 
 $steps->When('/^I check the delete checkbox for "([^"]*)"$/', function($world, $product_name) {
 	$product = Model::factory('vendo_product')->load(
 		db::select()->where('name', '=', $product_name)
 	);
-	$world->inputFields['delete['.$product->id.']'] = true;
+	$world->getSession()->getDriver()->check('//input[@name="delete['.$product->id.']"]');
 });
 
 $steps->When('/^I update the quantity of "([^"]*)" to "(\d+)"$/', function($world, $product_name, $num) {
 	$product = Model::factory('vendo_product')->load(
 		db::select()->where('name', '=', $product_name)
 	);
-	$world->inputFields['new_quantity['.$product->id.']'] = $num;
+	$world->getSession()->getDriver()->setValue('//input[@name="new_quantity['.$product->id.']"]', $num);
 });

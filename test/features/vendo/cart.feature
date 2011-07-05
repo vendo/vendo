@@ -6,14 +6,14 @@ Feature: Shopping cart management
 		Given I create a test product
 
 	Scenario: Add item to cart
-		Given I am on the test product page
-		When I click the "Add to cart" link
+		Given I visit the test product page
+		When I follow "Add to cart"
 		Then I should see the "Shopping Cart" page
 		And there should be 1 item in my shopping cart
 
 	Scenario: Remove item to cart
-		Given I am on the test product page
-		When I click the "Add to cart" link
+		Given I visit the test product page
+		When I follow "Add to cart"
 		Then I should see the "Shopping Cart" page
 		And there should be 1 item in my shopping cart
 		When I check the delete checkbox for "Test Product"
@@ -21,8 +21,8 @@ Feature: Shopping cart management
 		Then there should be 0 items in my shopping cart
 
 	Scenario: Change quantity of item to cart
-		Given I am on the test product page
-		When I click the "Add to cart" link
+		Given I visit the test product page
+		When I follow "Add to cart"
 		Then I should see the "Shopping Cart" page
 		And there should be 1 item in my shopping cart
 		When I update the quantity of "Test Product" to "2"

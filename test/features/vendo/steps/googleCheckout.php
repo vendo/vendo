@@ -48,7 +48,7 @@ $steps->When('/^I submit the order$/', function($world) {
 	}
 	catch (Payment_Exception $e)
 	{
-		throw new \Everzet\Behat\Exception\Pending('No Internet Connection!');
+		throw new \Behat\Behat\Exception\Pending('No Internet Connection!');
 	}
 });
 
