@@ -36,7 +36,7 @@
 	url = git://github.com/zombor/Goutte-for-Behat.git
 [submodule "modules/minion-core"]
 	path = modules/minion-core
-	url = https://github.com/kohana-minion/core.git
+	url = git://github.com/kohana-minion/core.git
 [submodule "modules/minion-migrations"]
 	path = modules/minion-migrations
-	url = https://github.com/kohana-minion/tasks-migrations.git
+	url = git://github.com/kohana-minion/tasks-migrations.git
